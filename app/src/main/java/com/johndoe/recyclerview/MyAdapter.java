@@ -3,12 +3,14 @@ package com.johndoe.recyclerview;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
  * Created by johndoe on 11/25/17.
  */
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+    private  int[] mImages;
     private String[] mDataset;
 
     // Provide a reference to the views for each data item
@@ -17,15 +19,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public TextView mTextView;
-        public ViewHolder(TextView v) {
+        public ImageView mImageView;
+        public ViewHolder(ViewGroup v) {
             super(v);
-            mTextView = v;
+            mTextView = v.findViewById(R.id.profile_txt);
+            mImageView = v.findViewById(R.id.profile_image);
         }
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(String[] myDataset) {
+    public MyAdapter(String[] myDataset, int[] myImages) {
         mDataset = myDataset;
+        mImages = myImages;
     }
 
     // Create new views (invoked by the layout manager)
@@ -33,12 +38,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                    int viewType) {
         // create a new view
-        TextView v = (TextView) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.my_text_view, parent, false);
+        ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.my_layout, parent, false);
         // set the view's size, margins, paddings and layout parameters
 
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
+        return new ViewHolder(v);
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -47,6 +51,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.mTextView.setText(mDataset[position]);
+        holder.mImageView.setImageResource(mImages[position]);
 
     }
 

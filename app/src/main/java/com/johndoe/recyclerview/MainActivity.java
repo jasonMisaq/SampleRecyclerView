@@ -18,6 +18,14 @@ public class MainActivity extends AppCompatActivity {
         "funf"
     };
 
+    private int images[] = {
+            R.drawable.img0,
+            R.drawable.img1,
+            R.drawable.img2,
+            R.drawable.img3,
+            R.drawable.img4
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
-        mAdapter = new MyAdapter(myDataset);
+        mAdapter = new MyAdapter(myDataset,images);
         mRecyclerView.setAdapter(mAdapter);
     }
 }
